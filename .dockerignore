@@ -1,0 +1,9 @@
+vendor/
+node_modules/
+.env
+.env.local
+.env.*.local
+.phpunit.result.cache
+.storage
+**/.git
+**/.github

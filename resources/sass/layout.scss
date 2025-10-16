@@ -1,0 +1,589 @@
+@import 'variables';
+
+// Theme System
+:root {
+  --bg-primary: #{$light-bg-primary};
+  --bg-secondary: #{$light-bg-secondary};
+  --bg-card: #{$light-bg-card};
+  --text-primary: #{$light-text-primary};
+  --text-secondary: #{$light-text-secondary};
+  --border-color: #{$light-border};
+  --sidebar-bg: #{$light-sidebar-bg};
+  --sidebar-active: #{$light-sidebar-active};
+  --brand: #{$primary-color};
+  --app-bg-image: url('/images/image.png');
+  --app-bg-opacity: 0.2;
+}
+
+// Collapsed navigation state
+.admin-layout.nav-collapsed {
+  .sidebar { transform: translateX(-100%); }
+  .main-content { margin-left: 0; }
+  .content-header {
+    margin-left: 0;
+    width: 100%;
+    padding-left: $spacing-md;
+  }
+}
+
+[data-theme="dark"] {
+  --bg-primary: #{$dark-bg-primary};
+  --bg-secondary: #{$dark-bg-secondary};
+  --bg-card: #{$dark-bg-card};
+  --text-primary: #{$dark-text-primary};
+  --text-secondary: #{$dark-text-secondary};
+  --border-color: #{$dark-border};
+  --sidebar-bg: #{$dark-sidebar-bg};
+  --sidebar-active: #{$dark-sidebar-active};
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-family-sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg-primary);
+}
+
+// Sidebar Styles
+.sidebar {
+  width: 260px;
+  background: linear-gradient(180deg, $brand-gradient-start 0%, $brand-gradient-end 100%);
+  border-right: none;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  transition: all 0.3s ease;
+  z-index: 100;
+  overflow-y: auto; // allow vertical scrolling when content overflows
+
+  .sidebar-header {
+    padding: $spacing-lg;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      background: $primary-color;
+      border-radius: $radius-md;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .brand-info {
+      flex: 1;
+
+      h2 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin: 0;
+      }
+
+      p {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        margin: 0;
+      }
+    }
+    
+
+    // Submenu at nav level
+    li.has-sub {
+      .menu-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        a.label { flex: 1; padding-right: $spacing-sm; }
+        .submenu-toggle {
+          background: transparent;
+          border: 0;
+          color: var(--text-secondary);
+          cursor: pointer;
+          padding: 6px;
+          border-radius: $radius-sm;
+          min-width: 28px;
+          text-align: center;
+          &:hover { background: var(--sidebar-active); color: var(--text-primary); }
+        }
+      }
+
+      .submenu {
+        list-style: none;
+        margin: 6px 0 10px 20px;
+        padding: 4px 0;
+        border-left: 2px solid var(--border-color);
+        max-height: 320px;
+        overflow-y: auto;
+        li { margin: 4px 0; }
+        li a {
+          display: flex;
+          align-items: center;
+          gap: $spacing-sm;
+          min-height: 36px;
+          padding: 8px $spacing-md 8px ($spacing-md - 2);
+          font-size: 0.9rem;
+          color: var(--text-secondary);
+          border-radius: $radius-md;
+          transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+          &:hover { background: var(--sidebar-active); color: var(--text-primary); }
+          &:focus-visible { outline: none; box-shadow: 0 0 0 2px rgba(0,0,0,0.08); }
+          .icon { width: 18px; display: inline-flex; justify-content: center; opacity: 0.9; }
+          .text { flex: 1; }
+        }
+        li.active a {
+          background: var(--sidebar-active);
+          color: var(--brand);
+          font-weight: 600;
+          box-shadow: inset 3px 0 0 var(--brand);
+          .icon { opacity: 1; }
+        }
+      }
+    }
+  }
+
+  .nav-section {
+    padding: $spacing-lg $spacing-md;
+    margin-bottom: $spacing-lg;
+
+    .section-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: $spacing-sm;
+      padding: 0 $spacing-md;
+    }
+  }
+
+  .nav-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      margin-bottom: 4px;
+      position: relative;
+
+      a {
+        display: flex;
+        align-items: center;
+        gap: $spacing-md;
+        padding: $spacing-sm $spacing-md;
+        color: rgba(255,255,255,0.85);
+        text-decoration: none;
+        border-radius: $radius-md;
+        transition: all 0.2s ease;
+        font-size: 0.9rem;
+
+        .icon {
+          font-size: 1.2rem;
+          width: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .label {
+          flex: 1;
+        }
+
+        &:hover { background: rgba(255,255,255,0.12); color: #fff; }
+      }
+
+      &.active a { background: rgba(255,255,255,0.18); color: #fff; font-weight: 600; position: relative; }
+
+      &.active a::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 6px;
+        bottom: 6px;
+        width: 4px;
+        border-radius: 2px;
+        background: #fff;
+      }
+    }
+  }
+
+  .sidebar-footer {
+    margin-top: auto;
+    padding: $spacing-lg;
+    border-top: 1px solid rgba(255,255,255,0.15);
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+      padding: $spacing-sm;
+      margin-bottom: $spacing-sm;
+
+      .user-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.25);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+      }
+
+      .user-details {
+        flex: 1;
+
+        .user-name {
+          font-size: 0.9rem;
+          font-weight: 600;
+          color: #fff;
+          display: block;
+        }
+
+        .user-role {
+          font-size: 0.75rem;
+          color: rgba(255,255,255,0.7);
+        }
+      }
+    }
+
+    .btn-logout {
+      width: 100%;
+      padding: $spacing-sm $spacing-md;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: $radius-md;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      justify-content: center;
+      transition: all 0.2s ease;
+      font-size: 0.9rem;
+
+      &:hover {
+        background: rgba(255,255,255,0.12);
+        color: #fff;
+        border-color: rgba(255,255,255,0.35);
+      }
+    }
+  }
+}
+
+// Main Content
+.main-content {
+  flex: 1;
+  margin-left: 260px;
+  min-height: 100vh;
+  background: var(--bg-primary);
+  // Background image via overlay for configurable opacity
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-image: var(--app-bg-image);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    opacity: var(--app-bg-opacity, 0.2);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .content-header {
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    padding: $spacing-lg $spacing-xl;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 90; // keep below sidebar (z-index:100) while dropdown uses 4000
+    box-shadow: 0 10px 20px -16px rgba(0,0,0,0.25);
+    // tighten left padding so brand block sits closer to the left edge
+    padding-left: $spacing-md;
+    // visually extend header background under the sidebar to the very left
+    margin-left: -260px;
+    width: calc(100% + 260px);
+    padding-left: calc(260px + $spacing-md);
+
+    // toggle button for collapsing navigation
+    .nav-toggle {
+      width: 40px;
+      height: 40px;
+      border-radius: $radius-md;
+      border: 1px solid var(--border-color);
+      background: transparent;
+      color: var(--text-primary);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: $spacing-md;
+      font-size: 1.1rem;
+      transition: all 0.2s ease;
+      &:hover { background: var(--sidebar-active); }
+    }
+  
+    .header-left {
+      flex: 1; // expand left side
+      display: flex;
+      align-items: center;
+      h1 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin: 0 0 4px 0;
+      }
+
+      p {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        margin: 0;
+      }
+    }
+
+    .header-right {
+      flex-shrink: 0; // keep right block compact
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+
+      .theme-toggle {
+        width: 40px;
+        height: 40px;
+        border-radius: $radius-md;
+        border: 1px solid var(--border-color);
+        background: transparent;
+        color: var(--text-primary);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        font-size: 1.2rem;
+
+        &:hover {
+          background: var(--sidebar-active);
+        }
+      }
+
+      .date-display {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        padding: $spacing-sm $spacing-md;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: $radius-md;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+
+        .icon {
+          font-size: 1rem;
+        }
+      }
+
+      .user-menu {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        padding: $spacing-sm $spacing-md;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: $radius-md;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        .user-avatar {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background: var(--brand);
+          color: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 600;
+          font-size: 0.85rem;
+          img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block; }
+        }
+
+        .user-info {
+          .user-name {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            display: block;
+            line-height: 1.2;
+          }
+
+          .user-role {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+          }
+        }
+
+        &:hover {
+          background: var(--sidebar-active);
+        }
+      }
+      // User dropdown panel
+      .user-dropdown {
+        position: fixed;
+        right: 24px;
+        top: 70px;
+        z-index: 4000;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: $radius-lg;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        min-width: 240px;
+        max-height: 70vh;
+        overflow: auto;
+
+        .dropdown-header {
+          display: flex;
+          align-items: center;
+          gap: $spacing-sm;
+          padding: $spacing-md;
+          background: var(--bg-secondary);
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        .dropdown-list {
+          list-style: none;
+          margin: 0;
+          padding: 4px 0;
+
+          .dropdown-item {
+            a, button {
+              width: 100%;
+              display: block;
+              text-align: left;
+              padding: 10px 16px;
+              background: transparent;
+              border: 0;
+              color: var(--text-primary);
+              text-decoration: none;
+              cursor: pointer;
+            }
+
+            a:hover, button:hover {
+              background: var(--sidebar-active);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .content-wrapper {
+    padding: $spacing-xl;
+    position: relative;
+  }
+}
+
+// Global Buttons
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: $radius-md;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  &:hover { background: var(--sidebar-active); }
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, $primary-color, $primary-hover);
+  border: none;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(37,99,235,0.18);
+  &:hover { filter: brightness(1.02); box-shadow: 0 10px 24px rgba(37,99,235,0.22); }
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: rgba($primary-color, 0.5);
+  color: $primary-color;
+  &:hover { background: rgba($primary-color, 0.06); }
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  &:hover { background: var(--sidebar-active); }
+}
+
+.btn-danger {
+  background: rgba($danger-color, 0.06);
+  border-color: rgba($danger-color, 0.4);
+  color: $danger-color;
+  &:hover { background: rgba($danger-color, 0.1); }
+}
+
+// Consistent image sizing
+.sidebar-header .logo img { width: 40px; height: 40px; object-fit: contain; border-radius: $radius-md; display: block; }
+.content-header .brand .logo-small { width: 32px; height: 32px; object-fit: contain; border-radius: $radius-md; display: block; }
+
+// Responsive
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+
+    &.open {
+      transform: translateX(0);
+    }
+  }
+
+  .main-content {
+    margin-left: 0;
+    &::before { left: 0; width: 100%; }
+  }
+
+  .content-header {
+    margin-left: 0;
+    width: 100%;
+    padding-left: $spacing-md;
+    z-index: 300; // ensure header is above content on mobile
+  }
+}
