@@ -37,8 +37,8 @@ export default function Login() {
     <div className="home-login">
       <div className="login-card">
         <div className="card-hero">
-          <img src="/images/hcc-logo.png.png" alt="Logo" className="brand-logo" />
-          <h1>SFMS Management System</h1>
+          <img src="/images/hcc-logo.png" alt="Holy Child College" className="brand-logo" />
+          <h1>HCC Management System</h1>
         </div>
         {msg && <div className="message error">{msg}</div>}
         <form onSubmit={submit}>

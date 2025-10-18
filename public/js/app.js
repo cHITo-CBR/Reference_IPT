@@ -68750,8 +68750,8 @@ function Layout(_ref) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "logo",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
-            src: "/images/hcc-logo.png.png",
-            alt: "Logo"
+            src: "/images/smcc-logo.png",
+            alt: "Saint Michael College of Caraga"
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "brand-info",
@@ -68885,8 +68885,8 @@ function Layout(_ref) {
             },
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
               className: "logo-small",
-              src: "/images/hcc-logo.png",
-              alt: "HCC",
+              src: "/images/college-logo.png",
+              alt: "SMCC",
               style: {
                 width: 32,
                 height: 32,
@@ -68895,7 +68895,7 @@ function Layout(_ref) {
               onError: function onError(e) {
                 if (!e.currentTarget.dataset.fallback) {
                   e.currentTarget.dataset.fallback = '1';
-                  e.currentTarget.src = '/images/hcc-logo.png.png';
+                  e.currentTarget.src = '/images/college-logo.png';
                 }
               }
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -68904,7 +68904,7 @@ function Layout(_ref) {
                   margin: 0,
                   fontSize: '1.1rem'
                 },
-                children: "Holy Child College"
+                children: "Saint Michael College of Caraga"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
                 style: {
                   margin: 0,
@@ -70599,8 +70599,8 @@ function Login() {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "card-hero",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-          src: "/images/hcc-logo.png.png",
-          alt: "Logo",
+          src: "/images/college-logo.png",
+          alt: "College Logo",
           className: "brand-logo"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
           children: "SFMS Management System"

@@ -50,7 +50,7 @@ export default function Layout({ children }) {
             <nav className={`sidebar${menuOpen ? ' open' : ''}`}>
                 <div className="sidebar-header">
                     <div className="logo">
-                        <img src="/images/hcc-logo.png.png" alt="Logo" />
+                        <img src="/images/hcc-logo.png" alt="Holy Child College" />
                     </div>
                     <div className="brand-info">
                         <h2>Profile System</h2>
@@ -117,7 +117,7 @@ export default function Layout({ children }) {
                         </button>
                         <div className="brand" style={{display:'flex', alignItems:'center', gap:'12px'}}>
                             <img className="logo-small" src="/images/hcc-logo.png" alt="HCC" style={{width:32, height:32, borderRadius:8}}
-                                onError={(e)=>{ if(!e.currentTarget.dataset.fallback){ e.currentTarget.dataset.fallback='1'; e.currentTarget.src='/images/hcc-logo.png.png'; } }}
+                                onError={(e)=>{ if(!e.currentTarget.dataset.fallback){ e.currentTarget.dataset.fallback='1'; e.currentTarget.src='/images/hcc-logo.png'; } }}
                             />
                             <div>
                                 <h1 style={{margin:0, fontSize:'1.1rem'}}>Holy Child College</h1>
